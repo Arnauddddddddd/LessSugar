@@ -12,11 +12,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import org.json.JSONObject
-
-
+import android.widget.ArrayAdapter
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var productList: MutableList<ProductInfo>
+    private lateinit var adapter: ProductAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -29,6 +31,14 @@ class MainActivity : AppCompatActivity() {
         val scanButton = findViewById<Button>(R.id.scan_button)
         val editText = findViewById<EditText>(R.id.textCode)
         val historyList = findViewById<ListView>(R.id.listView)
+
+        productList = mutableListOf(
+            ProductInfo("Chocolat noir", "Lindt", 22.0),
+            ProductInfo("Coca-Cola", "Coca", 43.0)
+        )
+
+        adapter = ProductAdapter(this, productList)
+        historyList.adapter = adapter
 
 
 
@@ -45,9 +55,17 @@ class MainActivity : AppCompatActivity() {
             val json = JSONObject(data)
             val product = json.getJSONObject("product")
             val nutriments = product.getJSONObject("nutriments")
-            val sugars100g = nutriments["sugars_100g"]
-            val nutritionScoreFr = nutriments["nutrition-score-fr"]
+            val productName = product.optString("product_name", "Nom inconnu")
+            val productImage = product.optString("image_front_url", "Nom inconnu")
+            val sugars100g = nutriments.optDouble("sugars_100g", -1.0)
+            val nutritionScoreFr = nutriments.optDouble("nutrition-score-fr", -1.0)
+
             //println("Mes données : $data")
+
+            val newProduct = ProductInfo(productName, productImage, sugars100g)
+            productList.add(newProduct)
+            adapter.notifyDataSetChanged()
+
             println(sugars100g)
         }
     }
