@@ -33,8 +33,7 @@ class MainActivity : AppCompatActivity() {
         val historyList = findViewById<ListView>(R.id.listView)
 
         productList = mutableListOf(
-            ProductInfo("Chocolat noir", "Lindt", 22.0),
-            ProductInfo("Coca-Cola", "Coca", 43.0)
+            ProductInfo("Coca Cola Cherry", "https://images.openfoodfacts.net/images/products/544/900/018/5945/front_fr.18.400.jpg", 10.3),
         )
 
         adapter = ProductAdapter(this, productList)
@@ -63,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             //println("Mes données : $data")
 
             val newProduct = ProductInfo(productName, productImage, sugars100g)
-            productList.add(newProduct)
+            productList.add(0, newProduct)
             adapter.notifyDataSetChanged()
 
             println(sugars100g)

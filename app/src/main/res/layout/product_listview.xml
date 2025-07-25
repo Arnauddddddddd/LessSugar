@@ -7,8 +7,10 @@
 
     <ImageView
         android:id="@+id/productImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
@@ -17,8 +19,8 @@
         android:id="@+id/productName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="83dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="28dp"
         android:text="TextView"
         android:textSize="24sp"
         app:layout_constraintStart_toEndOf="@+id/productImage"
@@ -37,7 +39,7 @@
         android:id="@+id/quantitySugar"
         android:layout_width="21dp"
         android:layout_height="19dp"
-        android:layout_marginStart="92dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="14dp"
         android:text="0"
         android:textAlignment="textEnd"

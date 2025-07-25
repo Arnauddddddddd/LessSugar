@@ -8,6 +8,8 @@ import android.view.ViewParent
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+
 
 
 class ProductAdapter(context: Context, private val products: List<ProductInfo>) :
@@ -18,12 +20,12 @@ ArrayAdapter<ProductInfo>(context, 0, products){
 
         view.findViewById<TextView>(R.id.productName).text = product.productName
         view.findViewById<TextView>(R.id.quantitySugar).text = product.sugar.toString()
-//        val imageView = view.findViewById<ImageView>(R.id.productImage)
-//        val imageUrl = product.productImageLink
-//
-//        Glide.with(this)
-//            .load(imageUrl)
-//            .into(imageView)
+        val imageView = view.findViewById<ImageView>(R.id.productImage)
+        val imageUrl = product.productImageLink
+
+        Glide.with(imageView.context)
+            .load(imageUrl)
+            .into(imageView)
 
         return view
     }
