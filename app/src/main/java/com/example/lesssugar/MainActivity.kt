@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         val historyList = findViewById<ListView>(R.id.listView)
 
         productList = mutableListOf(
-            ProductInfo("Coca Cola Cherry", "https://images.openfoodfacts.net/images/products/544/900/018/5945/front_fr.18.400.jpg", 10.3),
+            ProductInfo("Coca Cola Cherry", "https://images.openfoodfacts.net/images/products/544/900/018/5945/front_fr.18.400.jpg", 10.3, "e"),
         )
 
         adapter = ProductAdapter(this, productList)
@@ -56,12 +56,16 @@ class MainActivity : AppCompatActivity() {
             val nutriments = product.getJSONObject("nutriments")
             val productName = product.optString("product_name", "Nom inconnu")
             val productImage = product.optString("image_front_url", "Nom inconnu")
+            val nutriscore = product.optString("nutriscore_grade", "?")
+
+
             val sugars100g = nutriments.optDouble("sugars_100g", -1.0)
+
             val nutritionScoreFr = nutriments.optDouble("nutrition-score-fr", -1.0)
 
             //println("Mes données : $data")
 
-            val newProduct = ProductInfo(productName, productImage, sugars100g)
+            val newProduct = ProductInfo(productName, productImage, sugars100g, nutriscore)
             productList.add(0, newProduct)
             adapter.notifyDataSetChanged()
 

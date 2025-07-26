@@ -3,7 +3,8 @@ package com.example.lesssugar
 data class ProductInfo (
     val productName: String,
     val productImageLink: String,
-    val sugar: Double
+    val sugar: Double,
+    val nutriscore: String
 )
 
 
